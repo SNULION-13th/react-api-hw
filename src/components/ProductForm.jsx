@@ -23,6 +23,7 @@ function ProductForm({ onAdd }) {
       rating: { rate: 0, count: 0 },
     });
     setNewProduct({
+      // 다시 newproduct 초기화.
       title: "",
       price: "",
       description: "",
