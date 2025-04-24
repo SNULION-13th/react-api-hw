@@ -19,14 +19,23 @@ function ProductList() {
 
   const handleDelete = async (id) => {
     // TODO: DELETE API를 호출하고 fetchProducts() 호출
+    const response = await axios.delete(`${API_URL}/${id}`);
+    fetchProducts();
   };
 
   const handleAdd = async (newProduct) => {
     // TODO: POST API를 호출하고 fetchProducts() 호출
+    const response = await axios.post(API_URL, newProduct);
+    fetchProducts();
   };
 
   const handleEdit = async (updatedProduct) => {
     // TODO: PUT API를 호출하고 fetchProducts() 호출
+    const response = await axios.put(
+      `${API_URL}/${updatedProduct.id}`,
+      updatedProduct
+    );
+    fetchProducts();
   };
 
   return (
@@ -36,7 +45,12 @@ function ProductList() {
         {products.map((product) => (
           // TODO: ProductCard 컴포넌트를 적절히 호출하기
           // Note that you should specify key, product, onDelete, onEdit
-          <>Erase this line and put ProductCard component here</>
+          <ProductCard
+            key={product.id}
+            product={product}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
         ))}
       </div>
     </div>
