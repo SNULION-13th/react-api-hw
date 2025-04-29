@@ -19,18 +19,26 @@ function ProductList() {
 
   const handleDelete = async (id) => {
     // DELETE API를 호출하고 fetchProducts() 호출
-    await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-    fetchProducts();
+    try {
+      await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      fetchProducts();
+    } catch (e) {
+      console.error("Error deleting product:", e);
+    }
   };
 
   const handleAdd = async (newProduct) => {
     // POST API를 호출하고 fetchProducts() 호출
-    await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newProduct),
-    });
-    fetchProducts();
+    try {
+      await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProduct),
+      });
+      fetchProducts();
+    } catch (e) {
+      console.log("Error posting product:", e);
+    }
   };
 
   const handleEdit = async (updatedProduct) => {
