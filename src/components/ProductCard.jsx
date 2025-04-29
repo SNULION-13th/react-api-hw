@@ -7,7 +7,6 @@ function ProductCard({ product, onDelete, onEdit }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditedProduct((prev) => ({ ...prev, [name]: value }));
-    console.log(editedProduct);
   };
 
   const handleSave = () => {
