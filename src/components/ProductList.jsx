@@ -19,14 +19,38 @@ function ProductList() {
 
   const handleDelete = async (id) => {
     // TODO: DELETE API를 호출하고 fetchProducts() 호출
+    try {
+      await fetch("${API_URL}/${id}", {
+        method: "DELETE",
+      });
+      fetchProducts();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleAdd = async (newProduct) => {
     // TODO: POST API를 호출하고 fetchProducts() 호출
+    try {
+      await fetch("${API_URL}/${newProduct}", {
+        method: "POST",
+      });
+      fetchProducts();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleEdit = async (updatedProduct) => {
     // TODO: PUT API를 호출하고 fetchProducts() 호출
+    try {
+      await fetch("${API_URL}/${updatedProduct}", {
+        method: "PUT",
+      });
+      fetchProducts();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -36,7 +60,11 @@ function ProductList() {
         {products.map((product) => (
           // TODO: ProductCard 컴포넌트를 적절히 호출하기
           // Note that you should specify key, product, onDelete, onEdit
-          <>Erase this line and put ProductCard component here</>
+          <ProductCard
+            product={product}
+            onDelete={() => handleDelete(product)}
+            onEdit={() => handleEdit(product)}
+          ></ProductCard>
         ))}
       </div>
     </div>
