@@ -11,23 +11,52 @@ function ProductList() {
     fetchProducts();
   }, []);
 
-  const fetchProducts = async () => {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-    setProducts(data);
-  };
+const fetchProducts = async () => {
+  const res = await fetch(API_URL);
+  const data = await res.json();
+  setProducts(data);
+};
 
-  const handleDelete = async (id) => {
-    // TODO: DELETE API를 호출하고 fetchProducts() 호출
-  };
+const handleDelete = async (id) => {
+  try {
+    await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+    await fetchProducts();
+  } catch (e) {
+    console.error("failed to delete", e);
+  }
+};
 
-  const handleAdd = async (newProduct) => {
-    // TODO: POST API를 호출하고 fetchProducts() 호출
-  };
+const handleAdd = async (newProduct) => {
+  try {
+    await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newProduct),
+    });
+    await fetchProducts();
+  } catch (e) {
+    console.error("failed to add", e);
+  }
+};
 
-  const handleEdit = async (updatedProduct) => {
-    // TODO: PUT API를 호출하고 fetchProducts() 호출
-  };
+const handleEdit = async (updatedProduct) => {
+  try {
+    await fetch(`${API_URL}/${updatedProduct.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedProduct),
+    });
+    await fetchProducts();
+  } catch (e) {
+    console.error("failed to edit", e);
+  }
+};
 
   return (
     <div>
@@ -36,7 +65,12 @@ function ProductList() {
         {products.map((product) => (
           // TODO: ProductCard 컴포넌트를 적절히 호출하기
           // Note that you should specify key, product, onDelete, onEdit
-          <>Erase this line and put ProductCard component here</>
+          <ProductCard
+          key={product.id}
+          product={product}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+          />
         ))}
       </div>
     </div>
