@@ -33,12 +33,12 @@ function ProductList() {
   const handleAdd = async (newProduct) => {
     // TODO: POST API를 호출하고 fetchProducts() 호출
     try{
-      await fetch(`${API_URL}/${newProduct}`,{
+      await fetch(`${API_URL}`,{
         method:"POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedProduct),
+        body: JSON.stringify(newProduct),
       });
       fetchProducts();
       return true;
