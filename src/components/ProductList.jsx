@@ -51,7 +51,7 @@ function ProductList() {
   const handleEdit = async (updatedProduct) => {
     // TODO: PUT API를 호출하고 fetchProducts() 호출
     try{
-      await fetch(`${API_URL}/${updatedProduct}`,{
+      await fetch(`${API_URL}/${updatedProduct.id}`,{
         method:"PUT",
         headers: {
           "Content-Type": "application/json",
