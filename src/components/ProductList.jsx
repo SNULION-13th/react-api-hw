@@ -23,6 +23,7 @@ function ProductList() {
       await fetch(`${API_URL}/${id}`,{
         method:"DELETE",
       });
+      fetchProducts();
       return true;
     } catch(error){
       console.error("삭제 에러",error)
@@ -31,10 +32,21 @@ function ProductList() {
 
   const handleAdd = async (newProduct) => {
     // TODO: POST API를 호출하고 fetchProducts() 호출
+    try{
+      await fetch(`${API_URL}/${newProduct}`,{
+        method:"POST",
+      });
+      fetchProducts();
+      return true;
+    } catch(error){
+      console.error("post 에러",error)
+    }
   };
+
 
   const handleEdit = async (updatedProduct) => {
     // TODO: PUT API를 호출하고 fetchProducts() 호출
+    
   };
 
   return (
