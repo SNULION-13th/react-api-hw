@@ -35,6 +35,10 @@ function ProductList() {
     try{
       await fetch(`${API_URL}/${newProduct}`,{
         method:"POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProduct),
       });
       fetchProducts();
       return true;
@@ -46,7 +50,19 @@ function ProductList() {
 
   const handleEdit = async (updatedProduct) => {
     // TODO: PUT API를 호출하고 fetchProducts() 호출
-    
+    try{
+      await fetch(`${API_URL}/${updatedProduct}`,{
+        method:"PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProduct),
+      });
+      fetchProducts();
+      return true;
+    } catch(error){
+      console.error("put 에러",error)
+    }
   };
 
   return (
@@ -56,7 +72,8 @@ function ProductList() {
         {products.map((product) => (
           // TODO: ProductCard 컴포넌트를 적절히 호출하기
           // Note that you should specify key, product, onDelete, onEdit
-          <>Erase this line and put ProductCard component here</>
+          //<>Erase this line and put ProductCard component here</>
+
         ))}
       </div>
     </div>
