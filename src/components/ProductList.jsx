@@ -19,6 +19,14 @@ function ProductList() {
 
   const handleDelete = async (id) => {
     // TODO: DELETE API를 호출하고 fetchProducts() 호출
+    try{
+      await fetch(`${API_URL}/${id}`,{
+        method:"DELETE",
+      });
+      return true;
+    } catch(error){
+      console.error("삭제 에러",error)
+    }
   };
 
   const handleAdd = async (newProduct) => {
