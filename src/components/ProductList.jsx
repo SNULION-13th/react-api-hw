@@ -73,7 +73,12 @@ function ProductList() {
           // TODO: ProductCard 컴포넌트를 적절히 호출하기
           // Note that you should specify key, product, onDelete, onEdit
           //<>Erase this line and put ProductCard component here</>
-
+          <ProductCard 
+            key={product.id} 
+            product={product}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
         ))}
       </div>
     </div>
